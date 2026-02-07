@@ -1,7 +1,7 @@
--- Lunora Hub UI Library - Complete Version with Close/Open Button
+-- Quantum Hub X - Complete UI Library
 local LunoraHub = {}
 LunoraHub.Config = {
-    WindowName = "Lunora Hub",
+    WindowName = "Quantum Hub X",
     WindowSubtitle = "UI Library",
     WindowWidth = 450,
     WindowHeight = 320,
@@ -13,7 +13,7 @@ LunoraHub.Config = {
     CornerRadius = 16,
     StrokeThickness = 1.5,
     Transparency = 0.2,
-    LogoImage = "rbxassetid://0", -- Set your logo image ID here
+    LogoImage = "rbxasset://textures/ui/logo.png", -- Default Roblox logo
 }
 
 local Players = game:GetService("Players")
@@ -48,7 +48,7 @@ ScreenGui.ResetOnSpawn = false
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.Parent = PlayerGui
 
--- Open/Close Button (Style from lunora_hub_openclose.lua)
+-- Open/Close Button
 local OpenCloseGui = Instance.new("ScreenGui")
 OpenCloseGui.Name = "OpenClose"
 OpenCloseGui.ResetOnSpawn = false
@@ -193,46 +193,58 @@ SidebarStroke.Thickness = 1
 SidebarStroke.Transparency = 0.5
 SidebarStroke.Parent = Sidebar
 
--- Logo (Bangers Font)
+-- Logo Container (Fixed Display)
 local LogoContainer = Instance.new("Frame")
 LogoContainer.Name = "LogoContainer"
-LogoContainer.Size = UDim2.new(0, 40, 0, 40)
-LogoContainer.Position = UDim2.new(0, 10, 0, 8)
+LogoContainer.Size = UDim2.new(0, 36, 0, 36)
+LogoContainer.Position = UDim2.new(0, 8, 0, 10)
 LogoContainer.BackgroundColor3 = LunoraHub.Config.PrimaryColor
 LogoContainer.BorderSizePixel = 0
 LogoContainer.Parent = Sidebar
 
 local LogoCorner = Instance.new("UICorner")
-LogoCorner.CornerRadius = UDim.new(0, 8)
+LogoCorner.CornerRadius = UDim.new(0, 6)
 LogoCorner.Parent = LogoContainer
 
+-- Logo Image (Using gradient as fallback if image fails)
 local LogoImage = Instance.new("ImageLabel")
 LogoImage.Name = "LogoImage"
 LogoImage.Parent = LogoContainer
-LogoImage.BackgroundTransparency = 1
+LogoImage.BackgroundTransparency = 0
+LogoImage.BackgroundColor3 = LunoraHub.Config.PrimaryColor
 LogoImage.Size = UDim2.new(1, 0, 1, 0)
 LogoImage.Image = LunoraHub.Config.LogoImage
 LogoImage.ImageColor3 = LunoraHub.Config.TextColor
+LogoImage.ScaleType = Enum.ScaleType.Fit
 
--- Title (Bangers Font)
+-- Fallback gradient if image doesn't load
+local LogoGradient = Instance.new("UIGradient")
+LogoGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(100, 180, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(60, 150, 255))
+}
+LogoGradient.Parent = LogoImage
+
+-- Title (Bangers Font) - Adjusted position for logo
 local Title = Instance.new("TextLabel")
 Title.Name = "Title"
-Title.Size = UDim2.new(1, -65, 0, 34)
-Title.Position = UDim2.new(0, 55, 0, 8)
+Title.Size = UDim2.new(1, -60, 0, 36)
+Title.Position = UDim2.new(0, 50, 0, 8)
 Title.BackgroundTransparency = 1
 Title.Text = LunoraHub.Config.WindowName
 Title.TextColor3 = LunoraHub.Config.PrimaryColor
-Title.TextSize = 22
+Title.TextSize = 18
 Title.Font = Enum.Font.Bangers
 Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.TextYAlignment = Enum.TextYAlignment.Center
 Title.TextStrokeTransparency = 1
 Title.Parent = Sidebar
 
--- Subtitle (Bangers Font - Customizable)
+-- Subtitle (Bangers Font)
 local Subtitle = Instance.new("TextLabel")
 Subtitle.Name = "Subtitle"
 Subtitle.Size = UDim2.new(1, -15, 0, 16)
-Subtitle.Position = UDim2.new(0, 10, 0, 46)
+Subtitle.Position = UDim2.new(0, 10, 0, 50)
 Subtitle.BackgroundTransparency = 1
 Subtitle.Text = LunoraHub.Config.WindowSubtitle
 Subtitle.TextColor3 = Color3.fromRGB(170, 190, 210)
@@ -244,8 +256,8 @@ Subtitle.Parent = Sidebar
 -- Tab Container
 local TabContainer = Instance.new("ScrollingFrame")
 TabContainer.Name = "TabContainer"
-TabContainer.Size = UDim2.new(1, -15, 1, -130)
-TabContainer.Position = UDim2.new(0, 8, 0, 70)
+TabContainer.Size = UDim2.new(1, -15, 1, -135)
+TabContainer.Position = UDim2.new(0, 8, 0, 72)
 TabContainer.BackgroundTransparency = 1
 TabContainer.BorderSizePixel = 0
 TabContainer.ScrollBarThickness = 3
@@ -265,9 +277,9 @@ DiscordLabel.Name = "DiscordLabel"
 DiscordLabel.Size = UDim2.new(1, -20, 0, 40)
 DiscordLabel.Position = UDim2.new(0, 10, 1, -50)
 DiscordLabel.BackgroundTransparency = 1
-DiscordLabel.Text = "Lunora Hub"
+DiscordLabel.Text = "Quantum Hub X"
 DiscordLabel.TextColor3 = Color3.fromRGB(200, 210, 220)
-DiscordLabel.TextSize = 12
+DiscordLabel.TextSize = 11
 DiscordLabel.Font = Enum.Font.Bangers
 DiscordLabel.TextXAlignment = Enum.TextXAlignment.Center
 DiscordLabel.TextYAlignment = Enum.TextYAlignment.Center
@@ -475,7 +487,7 @@ function LunoraHub:CreateTab(tabName, layoutOrder, iconId)
     return TabContent
 end
 
--- Button Creation Function (Exact Style from Example - Bangers Font)
+-- Button Creation Function (Bangers Font)
 function LunoraHub:CreateButton(parent, buttonName, callback)
     local frame = Instance.new("Frame")
     frame.Name = "Button"
@@ -530,7 +542,7 @@ function LunoraHub:CreateButton(parent, buttonName, callback)
     end)
 end
 
--- Toggle Creation Function (New Style - Bangers Font)
+-- Toggle Creation Function (Bangers Font)
 function LunoraHub:CreateToggle(parent, text, defaultValue, description, callback)
     local state = defaultValue and true or false
 
@@ -1021,5 +1033,5 @@ function LunoraHub:CreateStatusBox(parent, titleText, initialText, textColor)
     return api
 end
 
-print("✨ Lunora Hub UI Library Loaded Successfully ✨")
+print("✨ Quantum Hub X - Loaded Successfully ✨")
 return LunoraHub
