@@ -13,7 +13,7 @@ LunoraHub.Config = {
     CornerRadius = 16,
     StrokeThickness = 1.5,
     Transparency = 0.2,
-    LogoImage = "rbxasset://textures/ui/logo.png", -- Default Roblox logo
+    LogoImage = "https://www.roblox.com/Thumbs/Asset.ashx?width=420&height=420&assetId=105064375011290",
 }
 
 local Players = game:GetService("Players")
@@ -193,42 +193,45 @@ SidebarStroke.Thickness = 1
 SidebarStroke.Transparency = 0.5
 SidebarStroke.Parent = Sidebar
 
--- Logo Container (Fixed Display)
+-- ============================================
+-- CIRCULAR LOGO - FIXED VERSION
+-- ============================================
+
+-- Logo Background (Transparent)
 local LogoContainer = Instance.new("Frame")
 LogoContainer.Name = "LogoContainer"
-LogoContainer.Size = UDim2.new(0, 36, 0, 36)
-LogoContainer.Position = UDim2.new(0, 8, 0, 10)
-LogoContainer.BackgroundColor3 = LunoraHub.Config.PrimaryColor
+LogoContainer.Size = UDim2.new(0, 38, 0, 38)
+LogoContainer.Position = UDim2.new(0, 8, 0, 9)
+LogoContainer.BackgroundTransparency = 1 -- TRANSPARENT
 LogoContainer.BorderSizePixel = 0
 LogoContainer.Parent = Sidebar
 
-local LogoCorner = Instance.new("UICorner")
-LogoCorner.CornerRadius = UDim.new(0, 6)
-LogoCorner.Parent = LogoContainer
-
--- Logo Image (Using gradient as fallback if image fails)
+-- Logo Image (Circular)
 local LogoImage = Instance.new("ImageLabel")
 LogoImage.Name = "LogoImage"
 LogoImage.Parent = LogoContainer
-LogoImage.BackgroundTransparency = 0
-LogoImage.BackgroundColor3 = LunoraHub.Config.PrimaryColor
+LogoImage.BackgroundTransparency = 1 -- TRANSPARENT BACKGROUND
 LogoImage.Size = UDim2.new(1, 0, 1, 0)
 LogoImage.Image = LunoraHub.Config.LogoImage
-LogoImage.ImageColor3 = LunoraHub.Config.TextColor
+LogoImage.ImageColor3 = Color3.fromRGB(255, 255, 255) -- WHITE COLOR
 LogoImage.ScaleType = Enum.ScaleType.Fit
 
--- Fallback gradient if image doesn't load
-local LogoGradient = Instance.new("UIGradient")
-LogoGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(100, 180, 255)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(60, 150, 255))
-}
-LogoGradient.Parent = LogoImage
+-- Circular corner
+local LogoCorner = Instance.new("UICorner")
+LogoCorner.CornerRadius = UDim.new(0.5, 0) -- PERFECT CIRCLE
+LogoCorner.Parent = LogoImage
+
+-- Optional: Border stroke for logo
+local LogoBorder = Instance.new("UIStroke")
+LogoBorder.Color = LunoraHub.Config.PrimaryColor
+LogoBorder.Thickness = 1
+LogoBorder.Transparency = 0.4
+LogoBorder.Parent = LogoImage
 
 -- Title (Bangers Font) - Adjusted position for logo
 local Title = Instance.new("TextLabel")
 Title.Name = "Title"
-Title.Size = UDim2.new(1, -60, 0, 36)
+Title.Size = UDim2.new(1, -62, 0, 36)
 Title.Position = UDim2.new(0, 50, 0, 8)
 Title.BackgroundTransparency = 1
 Title.Text = LunoraHub.Config.WindowName
@@ -841,7 +844,7 @@ function LunoraHub:CreateDropdown(parent, titleText, items, defaultText, onSelec
             delay(0.06, function()
                 pcall(function()
                     listScroll.CanvasSize = UDim2.new(0, 0, 0, listLayout.AbsoluteContentSize.Y)
-                end)
+            end)
             end)
         end
     end)
