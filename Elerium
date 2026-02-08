@@ -167,15 +167,17 @@ top.ImageColor3 = Color3.new(0.160784, 0.290196, 0.478431)
 top.ScaleType = Enum.ScaleType.Slice
 top.SliceCenter = Rect.new(12, 12, 12, 12)
 
-tabs.Name = "Tabs"
-tabs.Parent = window
-tabs.BackgroundColor3 = Color3.new(1, 1, 1)
-tabs.BackgroundTransparency = 1
-tabs.Position = UDim2.new(0, 15, 0, 80)
-tabs.Size = UDim2.new(1, -30, 1, -80)
-tabs.CanvasSize = UDim2.new(0, 0, 0, 0)  -- ADD THIS
-tabs.ScrollBarThickness = 8  -- ADD THIS
-tabs.ScrollingDirection = Enum.ScrollingDirection.Y  -- ADD THIS (for vertical scrolling)
+tab.Name = "Tab"
+tab.Parent = prefabs
+tab.BackgroundColor3 = Color3.new(1, 1, 1)
+tab.BackgroundTransparency = 1
+tab.Size = UDim2.new(1, 0, 1, 0)
+tab.Visible = false
+tab.CanvasSize = UDim2.new(0, 0, 0, 0)
+tab.ScrollBarThickness = 8
+tab.ScrollingDirection = Enum.ScrollingDirection.Y
+tab.ClipsDescendants = true  -- ADD THIS
+tab.BorderSizePixel = 0  -- ADD THIS
 
 titleLabel.Name = "Title"
 titleLabel.Parent = window
