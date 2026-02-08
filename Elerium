@@ -2042,11 +2042,10 @@ local object = prefabs:FindFirstChild("DropdownButton"):Clone()
 							end
 						end
 
-						return folder_data, folder
-									end
+												return folder_data, folder
+					end
 
-			end
-       -- Update canvas size for horizontal scrolling
+				end
 spawn(function()
 	while new_button and new_button.Parent do
 		local total_width = 0
@@ -2060,8 +2059,7 @@ spawn(function()
 	end
 end)
 
--- Update canvas size for tab content scrolling
--- Update canvas size for tab content scrolling
+ -- Update canvas size for tab content scrolling
 spawn(function()
 	while new_tab and new_tab.Parent do
 		local content_height = 0
