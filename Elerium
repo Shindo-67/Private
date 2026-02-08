@@ -191,7 +191,7 @@ tabSelection.Parent = window
 tabSelection.BackgroundColor3 = Color3.new(1, 1, 1)
 tabSelection.BackgroundTransparency = 1
 tabSelection.Position = UDim2.new(0, 15, 0, 30)
-tabSelection.Size = UDim2.new(1, -30, 0, 45)
+tabSelection.Size = UDim2.new(1, -30, 0, 30)
 tabSelection.Visible = false
 tabSelection.Image = "rbxassetid://2851929490"
 tabSelection.ImageColor3 = Color3.new(0.145098, 0.14902, 0.156863)
@@ -401,7 +401,7 @@ tabButton.BackgroundColor3 = Color3.new(0.160784, 0.290196, 0.478431)
 tabButton.BackgroundTransparency = 1
 tabButton.BorderSizePixel = 0
 tabButton.Position = UDim2.new(0.185185179, 0, 0, 0)
-tabButton.Size = UDim2.new(0, 71, 0, 40)
+tabButton.Size = UDim2.new(0, 71, 0, 25)
 tabButton.ZIndex = 2
 tabButton.Font = Enum.Font.GothamSemibold
 tabButton.Text = "Test tab"
@@ -1115,7 +1115,7 @@ local tab_buttons = tab_buttons_scroll:FindFirstChild("TabButtons")
 				local new_button = prefabs:FindFirstChild("TabButton"):Clone()
 				new_button.Parent = tab_buttons
 				new_button.Text = tab_name
-				new_button.Size = UDim2.new(0, gNameLen(new_button), 0, 40)
+				new_button.Size = UDim2.new(0, gNameLen(new_button), 0, 30)
 				new_button.ZIndex = new_button.ZIndex + (windows * 10)
 				new_button:GetChildren()[1].ZIndex = new_button:GetChildren()[1].ZIndex + (windows * 10)
 
@@ -1128,14 +1128,14 @@ local tab_buttons = tab_buttons_scroll:FindFirstChild("TabButtons")
 					for i, v in pairs(tab_buttons:GetChildren()) do
 						if not (v:IsA("UIListLayout")) then
 							v:GetChildren()[1].ImageColor3 = Color3.fromRGB(52, 53, 56)
-							Resize(v, {Size = UDim2.new(0, v.AbsoluteSize.X, 0, 40)}, options.tween_time)
+							Resize(v, {Size = UDim2.new(0, v.AbsoluteSize.X, 0, 30)}, options.tween_time)
 						end
 					end
 					for i, v in pairs(tabs:GetChildren()) do
 						v.Visible = false
 					end
 
-					Resize(new_button, {Size = UDim2.new(0, new_button.AbsoluteSize.X, 0, 40)}, options.tween_time)
+					Resize(new_button, {Size = UDim2.new(0, new_button.AbsoluteSize.X, 0, 30)}, options.tween_time)
 					new_button:GetChildren()[1].ImageColor3 = Color3.fromRGB(73, 75, 79)
 					new_tab.Visible = true
 				end
