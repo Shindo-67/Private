@@ -19,7 +19,7 @@ local bar = Instance.new("Frame")
 local toggle = Instance.new("ImageButton")
 local base = Instance.new("ImageLabel")
 local top = Instance.new("ImageLabel")
-local tabs = Instance.new("Frame")
+local tabs = Instance.new("ScrollingFrame")
 local titleLabel = Instance.new("TextLabel")
 local tabSelection = Instance.new("ImageLabel")
 local tabButtons = Instance.new("Frame")
@@ -173,6 +173,9 @@ tabs.BackgroundColor3 = Color3.new(1, 1, 1)
 tabs.BackgroundTransparency = 1
 tabs.Position = UDim2.new(0, 15, 0, 80)
 tabs.Size = UDim2.new(1, -30, 1, -80)
+tabs.CanvasSize = UDim2.new(0, 0, 0, 0)  -- ADD THIS
+tabs.ScrollBarThickness = 8  -- ADD THIS
+tabs.ScrollingDirection = Enum.ScrollingDirection.Y  -- ADD THIS (for vertical scrolling)
 
 titleLabel.Name = "Title"
 titleLabel.Parent = window
@@ -2040,9 +2043,9 @@ local object = prefabs:FindFirstChild("DropdownButton"):Clone()
 						end
 
 						return folder_data, folder
-					end
+									end
 
-				end
+			end
        -- Update canvas size for horizontal scrolling
 spawn(function()
 	while new_button and new_button.Parent do
@@ -2056,11 +2059,25 @@ spawn(function()
 		wait(0.1)
 	end
 end)
-				return tab_data, new_tab
+
+-- Update canvas size for tab content scrolling
+spawn(function()
+	while new_tab and new_tab.Parent do
+		local content_height = 0
+		for i, v in pairs(new_tab:GetChildren()) do
+			if not (v:IsA("UIListLayout")) then
+				content_height = content_height + v.AbsoluteSize.Y + 5
 			end
 		end
+		new_tab.CanvasSize = UDim2.new(0, 0, 0, content_height)
+		wait(0.1)
 	end
+end)
 
+			return tab_data, new_tab
+		end
+	end
+end
 
 	do
 		for i, v in pairs(Window:GetDescendants()) do
