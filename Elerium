@@ -2061,23 +2061,33 @@ spawn(function()
 end)
 
 -- Update canvas size for tab content scrolling
+-- Update canvas size for tab content scrolling
 spawn(function()
 	while new_tab and new_tab.Parent do
 		local content_height = 0
+		local uiListLayout = new_tab:FindFirstChild("UIListLayout")
+		
 		for i, v in pairs(new_tab:GetChildren()) do
-			if not (v:IsA("UIListLayout")) then
-				content_height = content_height + v.AbsoluteSize.Y + 5
+			if not (v:IsA("UIListLayout")) and v.Visible then
+				content_height = content_height + v.AbsoluteSize.Y
 			end
 		end
-		new_tab.CanvasSize = UDim2.new(0, 0, 0, content_height)
-		wait(0.1)
+		
+		-- Add padding from UIListLayout
+		if uiListLayout then
+			local childCount = 0
+			for i, v in pairs(new_tab:GetChildren()) do
+				if not (v:IsA("UIListLayout")) and v.Visible then
+					childCount = childCount + 1
+				end
+			end
+			content_height = content_height + (uiListLayout.Padding.Offset * (childCount - 1))
+		end
+		
+		new_tab.CanvasSize = UDim2.new(0, 0, 0, math.max(content_height, 1))
+		wait(0.05)
 	end
 end)
-
-			return tab_data, new_tab
-		end
-	end
-end
 
 	do
 		for i, v in pairs(Window:GetDescendants()) do
