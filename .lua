@@ -10,7 +10,7 @@ LunoraHub.Config = {
     SecondaryColor = Color3.fromRGB(0, 0, 0),
     DarkColor = Color3.fromRGB(20, 20, 20),
     TextColor = Color3.fromRGB(255, 255, 255),
-    CornerRadius = 0,
+    CornerRadius = 16,
     StrokeThickness = 1.5,
     Transparency = 0.2,
     LogoImage = "https://www.roblox.com/Thumbs/Asset.ashx?width=420&height=420&assetId=105064375011290",
